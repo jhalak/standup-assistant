@@ -18,7 +18,9 @@ $(function() {
       helper: "clone",
       cursor: "move"
     });
-
+    
+    attachBdlClick($(".talent li, .project li"));
+    
     // let the project be droppable, accepting the talent items
     $project.each(function(idx) {
       $(this).droppable({
@@ -39,11 +41,10 @@ $(function() {
       }
     });
 
-    // image deletion function
+    // talent deletion function
     var recycle_icon = "";
     function deleteImage( $item, $idx ) {
       var $parent = $($project[$idx]);
-      console.log($parent.attr('id'));
       var $curProject = $('#' + $parent.attr('id'));
       $item.fadeOut(function() {
         var $list = $( "ul", $curProject ).length ?
@@ -72,41 +73,18 @@ $(function() {
           .fadeIn();
       });
     }
-
-    // image preview function, demonstrating the ui.dialog used as a modal window
-    function viewLargerImage( $link ) {
-      var src = $link.attr( "href" ),
-        title = $link.siblings( "img" ).attr( "alt" ),
-        $modal = $( "img[src$='" + src + "']" );
-
-      if ( $modal.length ) {
-        $modal.dialog( "open" );
-      } else {
-        var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
-          .attr( "src", src ).appendTo( "body" );
-        setTimeout(function() {
-          img.dialog({
-            title: title,
-            width: 400,
-            modal: true
-          });
-        }, 1 );
-      }
+    
+    function attachBdlClick($item) {
+      $item.dblclick(function() {
+        var clone = $(this).clone().appendTo($(this).parents('ul')).draggable({
+          cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+          revert: "invalid", // when not dropped, the item will revert back to its initial position
+          containment: "document",
+          helper: "clone",
+          cursor: "move"
+        });
+        attachBdlClick(clone);
+      });
     }
-
-    // resolve the icons behavior with event delegation
-    $( "ul.talent > li" ).click(function( event ) {
-      var $item = $( this ),
-        $target = $( event.target );
-
-      if ( $target.is( "a.ui-icon-project" ) ) {
-        deleteImage( $item );
-      } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
-        viewLargerImage( $target );
-      } else if ( $target.is( "a.ui-icon-refresh" ) ) {
-        recycleImage( $item );
-      }
-
-      return false;
-    });
+    
   });

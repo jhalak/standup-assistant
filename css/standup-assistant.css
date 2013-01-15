@@ -6,7 +6,7 @@
 	clear: both;
 	min-height: 100px;
 }
-.talent { float: left;} * html .talent { height: 12em; } /* IE6 */
+.talent { float: left;min-height: 100px;width:100%;} * html .talent { height: 12em; } /* IE6 */
 .talent.custom-state-active { background: #eee; }
 .talent li { float: left; width: 96px; padding:1px; margin: 0 0.4em 0.4em 0; text-align: center; }
 .talent li h5 { margin: 0; cursor: move; font-size: 12px; }
