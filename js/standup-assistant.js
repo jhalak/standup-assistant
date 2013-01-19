@@ -5,86 +5,64 @@
  * 
  */
 
-$(function() {
-    // there's the talent and the project
-    var $talent = $( ".talent" ),
-      $project = $( ".project" );
 
-    // let the talent items be draggable
-    $( "li", $talent ).draggable({
-      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-      revert: "invalid", // when not dropped, the item will revert back to its initial position
-      containment: "document",
-      helper: "clone",
-      cursor: "move"
+/* Controller */
+function RouteController($scope,$location){
+  $scope.setRoute = function(route){
+    $location.path(route);
+  }
+}
+
+function SaController($scope,$routeParams,SA) {
+  $scope.talents = [
+                    {
+                      'id' : 1,
+                      'name': 'Bazlur'
+                    },
+                    {
+                      'id' : 2,
+                      'name': 'Jhalak'
+                    },
+                    {
+                      'id' : 3,
+                      'name': 'Jitu'
+                    },
+                    {
+                      'id' : 4,
+                      'name': 'Sakib'
+                    }
+  ];
+  $scope.projects = [
+                   {
+                     'id' : 1,
+                     'name' : 'Al Khudair',
+                   },
+                   {
+                     'id' : 2,
+                     'name' : 'Moteel',
+                   }
+  ];
+}
+
+function generateReport() {
+  $('.project').each(function(){
+      var $proj = $(this);
+      $proj.find('li').each(function(idx) {
+        console.log('Project' + $proj.attr('name') + $(this).attr('name'));
     });
-    
-    attachBdlClick($(".talent li, .project li"));
-    
-    // let the project be droppable, accepting the talent items
-    $project.each(function(idx) {
-      $(this).droppable({
-        accept: ".talent > li",
-        activeClass: "ui-state-highlight",
-        drop: function( event, ui ) {
-          deleteImage( ui.draggable, idx);
-        }
-      })
-    });
-
-    // let the talent be droppable as well, accepting items from the project
-    $talent.droppable({
-      accept: ".project li",
-      activeClass: "custom-state-active",
-      drop: function( event, ui ) {
-        recycleImage( ui.draggable );
-      }
-    });
-
-    // talent deletion function
-    var recycle_icon = "";
-    function deleteImage( $item, $idx ) {
-      var $parent = $($project[$idx]);
-      var $curProject = $('#' + $parent.attr('id'));
-      $item.fadeOut(function() {
-        var $list = $( "ul", $curProject ).length ?
-          $( "ul", $curProject ) :
-          $( "<ul class='talent ui-helper-reset'/>" ).appendTo( $curProject );
-
-        $item.find( "a.ui-icon-project" ).remove();
-        $item.append( recycle_icon ).appendTo( $list ).fadeIn();
-      });
-    }
-
-    // image recycle function
-    var project_icon = "";
-    function recycleImage( $item ) {
-      $item.fadeOut(function() {
-        $item
-          .find( "a.ui-icon-refresh" )
-            .remove()
-          .end()
-          .css( "width", "96px")
-          .append( project_icon )
-          .find( "img" )
-            .css( "height", "72px" )
-          .end()
-          .appendTo( $talent )
-          .fadeIn();
-      });
-    }
-    
-    function attachBdlClick($item) {
-      $item.dblclick(function() {
-        var clone = $(this).clone().appendTo($(this).parents('ul')).draggable({
-          cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-          revert: "invalid", // when not dropped, the item will revert back to its initial position
-          containment: "document",
-          helper: "clone",
-          cursor: "move"
-        });
-        attachBdlClick(clone);
-      });
-    }
-    
   });
+}
+
+/* Module */
+angular.module('standup-assistant', ['saModel']).
+  config(['$routeProvider',function($routeProvider) {
+    $routeProvider
+      .otherwise({templateUrl:'partials/home.html',controller:SaController});
+}]);
+
+/* Model */
+var model = angular.module('saModel', ['ngResource']);
+
+model.factory('SA', function($resource) {
+  
+});
