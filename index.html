@@ -25,7 +25,10 @@
         </ul>
       </div>
       <div class="operations">
-       <input type="button" value="Generate report" onclick="generateReport();" />
+       <input type="button" value="Generate report" onclick="ReportController()" />
+      </div>
+      <div id="report">
+      
       </div>
       <div class="projects">
         <div id="project{{project.id}}" name="{{project.name}}" pid="{{project.id}}" class="project ui-widget-content ui-state-default" ng-repeat="project in projects">

@@ -5,6 +5,7 @@ h2{
 .container{
 	width:1000px;
 	margin: 0 auto;
+	position: relative;
 }
 .tanents{
 	clear: both;
