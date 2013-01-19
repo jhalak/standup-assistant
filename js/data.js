@@ -32,13 +32,13 @@ var AllTalents = [
   ];
 
 var AllProjects = [
-    { 'id': 1, 'name' : "Moteel"},
-    { 'id': 2, 'name' : "Raakib"},
     { 'id': 3, 'name' : "Al-Khudair"},
     { 'id': 4, 'name' : "Al-Khudair mobile"},
-    { 'id': 5, 'name' : "OpenBravo"},
-    { 'id': 6, 'name' : "Ma7mi"},
     { 'id': 7, 'name' : "HR"},
+    { 'id': 6, 'name' : "Ma7mi"},
+    { 'id': 1, 'name' : "Moteel"},
+    { 'id': 5, 'name' : "OpenBravo"},
+    { 'id': 2, 'name' : "Raakib"},
     { 'id': 8, 'name' : "System Admin & Support"},
     { 'id': 9, 'name' : "Absent During Meeting"},
     { 'id': 10, 'name' : "Absent But Informed"},

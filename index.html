@@ -17,6 +17,10 @@
 <body ng-controller="RouteController">
   <div class="container">
 		<div ng-view></div>
+    <div class="operations">
+     <input type="button" value="Generate report" onclick="ReportController()" />
+    </div>
+    <div id="report"></div>
 	  <div class="ui-widget ui-helper-clearfix" ng:controller="SaController">
       <div class="tanents">
         <ul class="talent ui-helper-reset ui-helper-clearfix">
@@ -24,17 +28,13 @@
             <h5 class="ui-widget-header">{{talent.name}}</h5>
           </li>
         </ul>
-      </div>
-      <div class="operations">
-       <input type="button" value="Generate report" onclick="ReportController()" />
-      </div>
-      <div id="report">
-      
+        <div style="clear:both;"></div>
       </div>
       <div class="projects">
         <div id="project{{project.id}}" name="{{project.name}}" pid="{{project.id}}" class="project ui-widget-content ui-state-default" ng-repeat="project in projects">
           <h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">{{project.name}}</span> {{project.name}}</h4>
         </div>
+        <div style="clear:both;"></div>
       </div>  
     </div>
 	</div>
