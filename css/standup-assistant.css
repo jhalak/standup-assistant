@@ -1,6 +1,17 @@
 @CHARSET "UTF-8";
+*{
+	margin:0;
+	padding:0;
+}
+.ui-dialog-content .proj-name{
+	color: green;
+}
+.ui-dialog-content ul ul {
+	margin-left: 30px;
+}
 h2{
-	text-align: center;
+	text-align: left;
+	padding-bottom:10px;
 }
 .container{
 	width:1000px;
@@ -10,21 +21,48 @@ h2{
 .tanents{
 	clear: both;
 	min-height: 100px;
+	margin-bottom: 5px;
 }
-.talent { float: left;width:100%;} * html .talent { height: 12em; } /* IE6 */
+.talent { float: left; width:100%;padding:0;margine:0;text-align: center;} * html .talent { height: 12em; } /* IE6 */
 .tanents .talent{
 	min-height: 100px;
 }
 .talent.custom-state-active { background: #eee; }
-.talent li { float: left; width: 96px; padding:1px; margin: 0 0.4em 0.4em 0; text-align: center; }
+.talent li { width: 96px; padding:1px; margin: 0 0.4em 0.4em 0; text-align: center; display: inline-block; }
 .talent li h5 { margin: 0; cursor: move; font-size: 12px; }
 .talent li a { float: right; }
 .talent li a.ui-icon-zoomin { float: left; }
 .talent li img { width: 100%; cursor: move; }
+.tanents ul{
+  background-color: #377966;
+  padding: 5px 0 0 5px;
+  display: block;
+}
+
 .projects{
   clear: both;
+  background-color: #703030;
+  padding: 2px 0 2px 0;
 }
-.project { float: left; width: 22%; min-height: 110px; padding: 0.5%; margin-left: 2px;} * html .project { height: 18em; } /* IE6 */
+.ui-widget-header{
+	color: #2f343b;
+}
+.tanents .ui-widget-content,
+.projects .ui-widget-content{
+	background:none;
+  background-color: #e3cda4;
+}
+.projects .ui-widget-content{
+  border-bottom: 1px solid #703030;
+}
+.project { 
+	float: left;
+  width: 24.545%; 
+  min-height: 152px; 
+  padding: 0; 
+  margin-left: 2px;
+}
+* html .project { height: 18em; } /* IE6 */
 .project h4 { line-height: 16px; margin: 0 0 0.4em; }
 .project h4 .ui-icon { float: left; }
 
@@ -32,6 +70,8 @@ h2{
 	border: 0;
 	background: none;
 	font-size: 14px;
+	border: 1px solid #fff;
+	padding-bottom: 2px;
 }
 
 #project5,
@@ -40,4 +80,10 @@ h2{
 #project19,
 {
 	clear:left;
+}
+
+.operations{
+	position: absolute;
+	top: 0;
+	right: 0;
 }

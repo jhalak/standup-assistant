@@ -22,7 +22,7 @@ function ReportController() {
   var $html = '<ul>';
   $('.project').each(function(){
       var $proj = $(this);
-      $html += '<li>' + $proj.attr('name') + '</li>';
+      $html += '<li class="proj-name">' + $proj.attr('name') + '</li>';
       $html += '<ul>';
       $proj.find('li').each(function(idx) {
         $html += '<li>' + $(this).attr('name') + '</li>';
