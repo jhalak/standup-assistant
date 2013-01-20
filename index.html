@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Standup Assistant</title>
 	<link rel="stylesheet" href="js/jquery-ui/themes/base/jquery.ui.all.css">
+	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/standup-assistant.css">
 	
 	<script src="js/jquery-ui/js/jquery-1.8.3.js"></script>
@@ -16,7 +17,7 @@
 </head>
 <body ng-controller="RouteController">
   <!-- Report div -->
-  <div id="report"></div>
+  <div id="report" title="Report"></div>
   
   <div class="container">
 		<div ng-view></div>
@@ -25,11 +26,11 @@
     <div class="operations">
      <input id="btn_gen_report" type="button" value="Generate report" />
      <input id="btn_add_talent" type="button" value="Add talent" />
+     <input id="btn_add_project" type="button" value="Add project" />
     </div>
     
     <!-- Add talent form -->
     <div id="talent_add_form" title="Create new talent">
-		  <p class="validateTips">All form fields are required.</p>
 			<form>
 				<fieldset>
 					<label for="name">Name</label> 
@@ -38,23 +39,31 @@
 			</form>
 		</div>
 		
+    <!-- Add project form -->
+    <div id="project_add_form" title="Create new project">
+			<form>
+				<fieldset>
+					<label for="name">Name</label> 
+					<input type="text" name="name"	id="project_name" class="text ui-widget-content ui-corner-all" /> 
+				</fieldset>
+			</form>
+		</div>
+		
 	  <div class="ui-widget ui-helper-clearfix" ng:controller="SaController">
 			<!-- All talents -->
-      <div class="tanents">
+      <div class="tanents clearfix">
         <ul class="talent ui-helper-reset ui-helper-clearfix">
           <li id="talent{{talent.id}}" name="{{talent.name}}" tid="{{talent.id}}" class="ui-widget-content ui-corner-tr" ng-repeat = "talent in talents">
             <h5 class="ui-widget-header">{{talent.name}}</h5>
           </li>
         </ul>
-        <div style="clear:both;"></div>
       </div>
       
       <!-- All projects -->
-      <div class="projects">
+      <div class="projects clearfix">
         <div id="project{{project.id}}" name="{{project.name}}" pid="{{project.id}}" class="project ui-widget-content ui-state-default" ng-repeat="project in projects">
           <h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">{{project.name}}</span> {{project.name}}</h4>
         </div>
-        <div style="clear:both;"></div>
       </div>  
     </div>
 	</div>
