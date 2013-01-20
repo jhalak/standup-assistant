@@ -14,7 +14,7 @@ h2{
 	padding-bottom:10px;
 }
 .container{
-	width:1000px;
+	width:100%;
 	margin: 0 auto;
 	position: relative;
 }
@@ -86,4 +86,10 @@ h2{
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+.ui-dialog .ui-dialog-title,
+.ui-dialog .ui-dialog-buttonpane button,
+input.ui-button {
+	padding: 2px;
+	font-size: 12px;
 }
