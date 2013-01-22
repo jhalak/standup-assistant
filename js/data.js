@@ -25,7 +25,7 @@ var AllTalents = [
     { 'id': 24, 'name' : "Sakib"},
     { 'id': 25, 'name' : "Shahjahan"},
     { 'id': 26, 'name' : "Talha"},
-    { 'id': 27, 'name' : "Tanzim"},
+    { 'id': 27, 'name' : "Tanjim"},
     { 'id': 28, 'name' : "Tariq"},
     { 'id': 29, 'name' : "Wasiqul"},
     { 'id': 30, 'name' : "Younus"}
@@ -39,6 +39,7 @@ var AllProjects = [
     { 'id': 1, 'name' : "Moteel"},
     { 'id': 5, 'name' : "OpenBravo"},
     { 'id': 2, 'name' : "Raakib"},
+    { 'id': 12, 'name' : "OkDoIt"},
     { 'id': 8, 'name' : "System Admin & Support"},
     { 'id': 9, 'name' : "Absent During Meeting"},
     { 'id': 10, 'name' : "Absent But Informed"},
