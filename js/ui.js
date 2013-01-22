@@ -30,7 +30,10 @@ $(function() {
         }
       })
     });
-
+    
+    // make the projects sortable
+    $('.projects').sortable();
+    
     // let the talent be droppable as well, accepting items from the project
     $talent.droppable({
       accept: ".project li",
