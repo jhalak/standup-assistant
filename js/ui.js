@@ -147,6 +147,7 @@ $(function() {
           });
           if (bValid) {
             $('.projects').append($newProject);
+            addProject($projectName);
             $(this).dialog("close");
           }
         },

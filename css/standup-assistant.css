@@ -87,6 +87,9 @@ h2{
 	top: 0;
 	right: 0;
 }
+.add-form{
+	display:none;
+}
 .ui-dialog .ui-dialog-title,
 .ui-dialog .ui-dialog-buttonpane button,
 input.ui-button {
