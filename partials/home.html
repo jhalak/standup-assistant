@@ -1,1 +1,51 @@
-<h2>Standup Assistant</h2>
+<!-- Report div -->
+  <div id="report" title="Report"></div>
+  
+<!-- Operation buttons -->
+    <div class="operations">
+     <input id="btn_gen_report" type="button" value="Generate report" />
+     <input id="btn_add_talent" type="button" value="Add talent" />
+     <input id="btn_add_project" type="button" value="Add project" />
+    </div>
+    
+    <!-- Add talent form -->
+    <div class="add-form" id="talent_add_form" title="Create new talent">
+      <form>
+        <fieldset>
+          <label for="name">Name</label> 
+          <input type="text" name="name"  id="talent_name" class="text ui-widget-content ui-corner-all" /> 
+        </fieldset>
+      </form>
+    </div>
+    
+    <!-- Add project form -->
+    <div class="add-form" id="project_add_form" title="Create new project">
+      <form>
+        <fieldset>
+          <label for="name">Name</label> 
+          <input type="text" name="name"  id="project_name" class="text ui-widget-content ui-corner-all" /> 
+        </fieldset>
+      </form>
+    </div>
+    
+    <div class="ui-widget ui-helper-clearfix" ng:controller="SaController">
+      <!-- All talents -->
+      <div class="tanents clearfix">
+        <ul class="talent ui-helper-reset ui-helper-clearfix">
+          <li id="talent{{talent.id}}" name="{{talent.name}}" tid="{{talent.id}}" class="ui-widget-content ui-corner-tr" ng-repeat = "talent in talents">
+            <h5 class="ui-widget-header">{{talent.name}}</h5>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- All projects -->
+      <div class="projects clearfix">
+        <div id="project{{project.id}}" name="{{project.name}}" pid="{{project.id}}" class="project ui-widget-content ui-state-default" ng-repeat="project in projects">
+          <h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">{{project.name}}</span> {{project.name}}</h4>
+        </div>
+      </div>  
+    </div>
+  
+  <script src="js/jquery-ui/js/jquery-1.8.3.js"></script>
+  <script src="js/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="js/ui.js"></script>

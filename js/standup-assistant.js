@@ -5,6 +5,12 @@
  * 
  */
 
+/* Module */
+angular.module('standup-assistant', ['ngResource']).
+  config(['$routeProvider',function($routeProvider) {
+    $routeProvider
+      .otherwise({templateUrl:'partials/home.html',controller:SaController});
+}]);
 
 /* Controller */
 function RouteController($scope,$location){
@@ -13,7 +19,7 @@ function RouteController($scope,$location){
   }
 }
 
-function SaController($scope,$routeParams,SA) {
+function SaController($scope) {
   $scope.talents = AllTalents;
   $scope.projects = AllProjects;
 }
@@ -33,16 +39,6 @@ function ReportController() {
   $('#report').html($html).dialog();
 }
 
-/* Module */
-angular.module('standup-assistant', ['saModel']).
-  config(['$routeProvider',function($routeProvider) {
-    $routeProvider
-      .otherwise({templateUrl:'partials/home.html',controller:SaController});
-}]);
-
-/* Model */
-var model = angular.module('saModel', ['ngResource']);
-
-model.factory('SA', function($resource) {
-  
-});
+function addProject(name){
+  //console.log(name);
+}
