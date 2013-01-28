@@ -5,7 +5,7 @@
  * 
  */
 
-$(function() {
+var SaUi = function() {
     var $talent = $( ".talent" ),
       $project = $( ".project" ),
       $draggableOptions = {
@@ -177,4 +177,4 @@ $(function() {
     
     
     
-  });
+  }
