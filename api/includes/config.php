@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/functions.php';
 require_once 'includes/data.php';
 
 function get_db_handler() {

@@ -1,5 +1,24 @@
 <?php
 
+function get_talents() {
+  $db = get_db_handler();
+  $result = $db->query('SELECT * FROM talents ORDER BY name ASC');
+  $rows = array();
+  $count = 0;
+  while($res = $result->fetchArray()) {
+    $rows[$count]['id'] = $res['id'];
+    $rows[$count]['name'] = $res['name'];
+    $rows[$count]['email'] = $res['email'];
+    $count++;
+  }
+  return $rows;
+}
+
+function detete_talent($id) {
+  $db = get_db_handler();
+  $db->query('DELETE FROM talents WHERE id = ' . $id);
+}
+
 function get_projects() {
   $db = get_db_handler();
   $result = $db->query('SELECT * FROM projects');
@@ -14,15 +33,6 @@ function get_projects() {
   return $rows;
 }
 
-function get_talents() {
-  $db = get_db_handler();
-  $result = $db->query('SELECT * FROM talents');
-  $rows = array();
-  while($res = $result->fetchArray()) {
-    $rows[] = (object)$res;
-  }
-  return $rows;
-}
 
 function addProject() {
   try{

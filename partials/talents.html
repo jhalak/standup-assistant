@@ -5,15 +5,13 @@
 
 <table class="table table-striped">
   <thead>
-    <th>Id</th>
     <th>Name</th>
     <th>Email</th>
     <th>Operation</th>
   </thead>
-  <tr ng-repeat="talent in talents.data">
-    <td>{{talent.id}}</td>
+  <tr ng-model="Talent" ng-repeat="talent in talents.data">
     <td>{{talent.name}}</td>
     <td>{{talent.email}}</td>
-    <td><button><i class="icon-trash"> </i>Delete</button></td>
+    <td><button ng:click="talents.$remove(talent)"><i class="icon-trash"> </i>Delete</button></td>
   </tr>
 </table>
