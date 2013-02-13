@@ -1,6 +1,5 @@
 <?php
 require_once 'includes/config.php';
-//echo $_SERVER['REQUEST_METHOD'];
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 
@@ -44,7 +43,7 @@ switch ($method) {
         }
         break;
     
-      default:
+      case 'all':
         $data = array(
       		'projects' => get_projects(),
       		'talents' => get_talents(),
@@ -72,8 +71,22 @@ switch ($method) {
     break;
     
   case 'PUT':
+    $data = file_get_contents('php://input');
     $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
-    print_r($request);
+    switch ($request[0]) {
+      case 'talent':
+        switch($request[1]){
+          case 'add':
+            $request = convertUrlQuery($data);
+            echo addTalent($request);
+            break;
+          case 'update':
+            $data = json_decode($data);
+            updateTalent($data);
+            break;
+        }
+        break;
+    }
     break;
 }
 

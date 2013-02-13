@@ -95,24 +95,32 @@ var SaUi = function() {
     // add talent form
     $("#talent_add_form").dialog({
       autoOpen : false,
-      height : 160,
+      height : 180,
       width : 350,
       modal : true,
       buttons : {
         "Add talent" : function() {
           var bValid = true,
           $talentName = $("#talent_name").val(),
-          $talentId = 50; // TODO: need to set it dynamically
-          var $newTalent = $(
-            '<li id="talent' + $talentId + '" name="' + $talentName + '" tid="' + $talentId + '" class="ui-widget-content ui-corner-tr">' + 
-              '<h5 class="ui-widget-header">' + $talentName + '</h5>' + 
-            '</li>')
-          .draggable($draggableOptions);
-          attachBdlClick($newTalent);
-          if (bValid) {
-            $($talent).append($newTalent);
-            $(this).dialog("close");
-          }
+          $talentEmail = $("#talent_email").val();
+          $.ajax({
+              url: 'api/index.php/talent/add',
+              data: {q: 'talent', action: 'add', name: $talentName, email: $talentEmail},
+              type: 'PUT',
+              success: function(response) {
+                $talentId = response.id;
+                var $newTalent = $(
+                      '<li id="talent' + $talentId + '" name="' + $talentName + '" tid="' + $talentId + '" class="ui-widget-content ui-corner-tr">' + 
+                      '<h5 class="ui-widget-header">' + $talentName + '</h5>' + 
+                    '</li>')
+                .draggable($draggableOptions);
+                attachBdlClick($newTalent);
+                if (bValid) {
+                  $($talent).append($newTalent);
+                }
+              }
+          });
+          $(this).dialog("close");
         },
         Cancel : function() {
           $(this).dialog("close");

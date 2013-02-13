@@ -35,7 +35,3 @@ function ReportController() {
   $html += '</ul>';
   $('#report').html($html).dialog();
 }
-
-function addProject(name){
-  //console.log(name);
-}
