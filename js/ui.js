@@ -140,24 +140,31 @@ var SaUi = function() {
       buttons : {
         "Add project" : function() {
           var bValid = true,
-          $projectName = $("#project_name").val(),
-          $projectId = 50; // TODO: need to set it dynamically
-          var $newProject = $(
-              '<div id="project' + $projectId + '" name="' + $projectName + '" pid="' + $projectId + '" class="project ui-widget-content ui-state-default">' + 
-              '<h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">' + $projectName + '</span> ' + $projectName + '</h4>' + 
+          $projectName = $("#project_name").val();
+          $.ajax({
+            url: 'api/index.php/project/add',
+            data: {name: $projectName},
+            type: 'PUT',
+            success: function(response) {
+              var $projectId = response.id;
+              var $newProject = $(
+                  '<div id="project' + $projectId + '" name="' + $projectName + '" pid="' + $projectId + '" class="project ui-widget-content ui-state-default">' + 
+                  '<h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">' + $projectName + '</span> ' + $projectName + '</h4>' + 
               '</div>')
-          .droppable({
-            accept: ".talent > li",
-            activeClass: "ui-state-highlight",
-            drop: function( event, ui ) {
-              deleteTalent( ui.draggable, $projectId, $newProject);
+              .droppable({
+                accept: ".talent > li",
+                activeClass: "ui-state-highlight",
+                drop: function( event, ui ) {
+                  deleteTalent( ui.draggable, $projectId, $newProject);
+                }
+              });
+              if (bValid) {
+                $('.projects').append($newProject);
+              }
             }
           });
-          if (bValid) {
-            $('.projects').append($newProject);
-            addProject($projectName);
-            $(this).dialog("close");
-          }
+          $(this).dialog("close");
+          
         },
         Cancel : function() {
           $(this).dialog("close");

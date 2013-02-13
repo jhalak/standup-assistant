@@ -86,6 +86,14 @@ switch ($method) {
             break;
         }
         break;
+      case 'project':
+        switch($request[1]){
+          case 'add':
+            $request = convertUrlQuery($data);
+            echo addProjectFrontEnd($request);
+            break;
+        }
+        break;
     }
     break;
 }

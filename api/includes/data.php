@@ -73,6 +73,19 @@ function addProject() {
   }
 }
 
+function addProjectFrontEnd($data) {
+  try{
+    $db = get_db_handler();
+    $result = $db->query('INSERT INTO projects (name, type) VALUES("' . $data['name'] . '", "main")');
+    $result = $db->query('SELECT id FROM projects ORDER BY id desc LIMIT 1');
+    $res = $result->fetchArray();
+    $id = $res['id'];
+    show_as_json(array('id' => $id));
+  }catch(Exception $e){
+    echo $e->getMessage();
+  }
+}
+
 function updateProject() {
   try{
     $data = json_decode($_GET['models']);
