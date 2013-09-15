@@ -1,0 +1,28 @@
+<h2>Manage Talents</h2>
+
+<table class="table table-striped" width="100%">
+  <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Operation</th>
+  </thead>
+  <tr ng-repeat="talent in talents.data">
+    <td width="30%">
+      <edit-in-place 
+        model="{{talent}}" 
+        value="{{talent.name}}"
+        update="name"
+        >
+      </edit-in-place>
+    </td>
+    <td width="60%">
+      <edit-in-place 
+        model="{{talent}}" 
+        value="{{talent.email}}"
+        update="email"
+        >
+      </edit-in-place>
+    </td>
+    <td width="10%"><button ng-click="talents.$remove(talent)"><i class="icon-trash"> </i>Delete</button></td>
+  </tr>
+</table>

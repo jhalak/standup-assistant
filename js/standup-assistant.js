@@ -6,22 +6,19 @@
  */
 
 /* Module */
-angular.module('standup-assistant', ['ngResource']).
-  config(['$routeProvider',function($routeProvider) {
-    $routeProvider
-      .otherwise({templateUrl:'partials/home.html',controller:SaController});
-}]);
+angular.module('Standup Assistant', ['ngResource']);
 
 /* Controller */
-function RouteController($scope,$location){
-  $scope.setRoute = function(route){
-    $location.path(route);
-  }
-}
-
-function SaController($scope) {
-  $scope.talents = AllTalents;
-  $scope.projects = AllProjects;
+function SaController($scope, $resource) {
+  $resource('api/:action', 
+      {action:'index.php', q: 'all', callback: 'JSON_CALLBACK'},
+      {get:{method:'JSON'}}
+  )
+  .get(function(result){
+    $scope.projects = result.projects;
+    $scope.talents = result.talents;
+    setTimeout('SaUi()', 100);
+  });
 }
 
 function ReportController() {
@@ -37,8 +34,4 @@ function ReportController() {
   });
   $html += '</ul>';
   $('#report').html($html).dialog();
-}
-
-function addProject(name){
-  //console.log(name);
 }

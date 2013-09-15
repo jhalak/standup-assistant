@@ -5,7 +5,7 @@
  * 
  */
 
-$(function() {
+var SaUi = function() {
     var $talent = $( ".talent" ),
       $project = $( ".project" ),
       $draggableOptions = {
@@ -95,24 +95,32 @@ $(function() {
     // add talent form
     $("#talent_add_form").dialog({
       autoOpen : false,
-      height : 160,
+      height : 180,
       width : 350,
       modal : true,
       buttons : {
         "Add talent" : function() {
           var bValid = true,
           $talentName = $("#talent_name").val(),
-          $talentId = 50; // TODO: need to set it dynamically
-          var $newTalent = $(
-            '<li id="talent' + $talentId + '" name="' + $talentName + '" tid="' + $talentId + '" class="ui-widget-content ui-corner-tr">' + 
-              '<h5 class="ui-widget-header">' + $talentName + '</h5>' + 
-            '</li>')
-          .draggable($draggableOptions);
-          attachBdlClick($newTalent);
-          if (bValid) {
-            $($talent).append($newTalent);
-            $(this).dialog("close");
-          }
+          $talentEmail = $("#talent_email").val();
+          $.ajax({
+              url: 'api/index.php/talent/add',
+              data: {q: 'talent', action: 'add', name: $talentName, email: $talentEmail},
+              type: 'PUT',
+              success: function(response) {
+                $talentId = response.id;
+                var $newTalent = $(
+                      '<li id="talent' + $talentId + '" name="' + $talentName + '" tid="' + $talentId + '" class="ui-widget-content ui-corner-tr">' + 
+                      '<h5 class="ui-widget-header">' + $talentName + '</h5>' + 
+                    '</li>')
+                .draggable($draggableOptions);
+                attachBdlClick($newTalent);
+                if (bValid) {
+                  $($talent).append($newTalent);
+                }
+              }
+          });
+          $(this).dialog("close");
         },
         Cancel : function() {
           $(this).dialog("close");
@@ -132,24 +140,31 @@ $(function() {
       buttons : {
         "Add project" : function() {
           var bValid = true,
-          $projectName = $("#project_name").val(),
-          $projectId = 50; // TODO: need to set it dynamically
-          var $newProject = $(
-              '<div id="project' + $projectId + '" name="' + $projectName + '" pid="' + $projectId + '" class="project ui-widget-content ui-state-default">' + 
-              '<h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">' + $projectName + '</span> ' + $projectName + '</h4>' + 
+          $projectName = $("#project_name").val();
+          $.ajax({
+            url: 'api/index.php/project/add',
+            data: {name: $projectName},
+            type: 'PUT',
+            success: function(response) {
+              var $projectId = response.id;
+              var $newProject = $(
+                  '<div id="project' + $projectId + '" name="' + $projectName + '" pid="' + $projectId + '" class="project ui-widget-content ui-state-default">' + 
+                  '<h4 class="ui-widget-header"><span class="ui-icon ui-icon-project">' + $projectName + '</span> ' + $projectName + '</h4>' + 
               '</div>')
-          .droppable({
-            accept: ".talent > li",
-            activeClass: "ui-state-highlight",
-            drop: function( event, ui ) {
-              deleteTalent( ui.draggable, $projectId, $newProject);
+              .droppable({
+                accept: ".talent > li",
+                activeClass: "ui-state-highlight",
+                drop: function( event, ui ) {
+                  deleteTalent( ui.draggable, $projectId, $newProject);
+                }
+              });
+              if (bValid) {
+                $('.projects').append($newProject);
+              }
             }
           });
-          if (bValid) {
-            $('.projects').append($newProject);
-            addProject($projectName);
-            $(this).dialog("close");
-          }
+          $(this).dialog("close");
+          
         },
         Cancel : function() {
           $(this).dialog("close");
@@ -177,4 +192,4 @@ $(function() {
     
     
     
-  });
+  }
